@@ -1,6 +1,7 @@
 #lang racket
 
 (require "syms.rkt")
+(require "reader.rkt")
 (require racket/gui)
 (require racket/draw)
 
@@ -66,11 +67,11 @@
                          [callback (λ (b e)
                                      (send (send result-box get-editor) insert (send input-box get-value))
                                      (send (send result-box get-editor) insert (format "~%"))
-                                     (send input-box set-value "")
-                                     (send input-box focus)
                                      (send the-clipboard set-clipboard-string
                                            (send input-box get-value)
-                                           (send e get-time-stamp)))]))
+                                           (send e get-time-stamp))
+                                     (send input-box set-value "")
+                                     (send input-box focus))]))
   (define-values (buttons vpane hpanes)
     (create-paned-buttons editor-pane unicode-symbols 10
                           (λ (s)
