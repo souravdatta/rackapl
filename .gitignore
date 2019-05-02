@@ -1,7 +1,9 @@
-*.ss~
-*.ss#*
-.#*.ss
+*.rkt~
+*.rkt#*
+.#*.rkt
+compiled/
+*.exe
+*.dmg
+*.zip
+*.tar.gz
 
-*.scm~
-*.scm#*
-.#*.scm

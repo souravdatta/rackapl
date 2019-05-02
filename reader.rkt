@@ -27,7 +27,7 @@
   (append-while lst (λ (s) (or (symbol-char? s)
                                (digit? s))) ""))
 
-(define expr-test "v1←2 + (+/ 1 2 3) * 11 2 3 (4+4) 2 + 3")
+(define expr-test "v1←2 + (+/ 1 2 3) * 11 2 3 (4+4) 2 + 3 6")
 
 (define (convert s)
   (map (λ (x) (format "~a" x))
