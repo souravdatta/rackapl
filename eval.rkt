@@ -26,7 +26,6 @@
        (equal? (cdr op1)
                (cdr op2))))
 
-
 (define (extract-tokens for-op match-op tokens)
   (define (extract-tokens-aux cur-tokens extracted-tokens count-op)
     ;(displayln (format "CURTOKENS: ~a~%EXTRACTED: ~a~%" cur-tokens extracted-tokens))
@@ -41,8 +40,6 @@
            (extract-tokens-aux (cdr cur-tokens) (cons (car cur-tokens) extracted-tokens) (+ count-op 1)))
           (else (extract-tokens-aux (cdr cur-tokens) (cons (car cur-tokens) extracted-tokens) count-op)))))
   (extract-tokens-aux (cdr tokens) '() 1))
-    
-
 
 (define (apleval tokens arg-stack op-stack)
   (cond
@@ -69,3 +66,7 @@
                         [op-stack (cdr op-stack)])
                    (apleval (cdr tokens) (consume op arg-stack) (cons (car tokens) op-stack)))
                  (apleval (cdr tokens) (cons '() arg-stack) (cons (car tokens) op-stack))))))))
+
+(define (apleval-s s)
+  (remove-empties (apleval (tokenize s) '() '())))
+
