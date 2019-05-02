@@ -19,7 +19,9 @@
 
 (define (apleval tokens arg-stack op-stack)
   (cond
-    ((empty? tokens) (list op-stack arg-stack))
+    ((empty? tokens) (consume (if
+                               (empty? op-stack) '(operator . ")disp") (car op-stack))
+                              arg-stack))
     ((operand? (car tokens)) (apleval (cdr tokens)
                                       (create-or-append-arg (car tokens) arg-stack)
                                       op-stack))
