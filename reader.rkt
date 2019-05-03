@@ -51,7 +51,7 @@
               ((digit? head)
                (let-values ([(digit rest-list) (read-digits lst)])
                  (get-tokens rest-list #:token-list (cons (cons 'numeric
-                                                                digit)
+                                                                (string->number digit))
                                                           token-list))))
               ((symbol-char? head)
                (let-values ([(word rest-list) (read-word lst)])
@@ -62,6 +62,22 @@
 
 (define (tokenize s)
   (get-tokens (convert s)))
+
+(define (word-tag? tok)
+  (eq? (car tok) 'word))
+
+(define (operand-tag? tok)
+  (eq? (car tok) 'numeric))
+
+(define (operator-tag? tok)
+  (or (eq? (car tok) 'operator)
+      (eq? (car tok) 'unicode-operator)))
+
+(define (operator-tag=? op1 op2)
+  (and (operator-tag? op1)
+       (operator-tag? op2)
+       (equal? (cdr op1)
+               (cdr op2))))
 
 
 (provide (all-defined-out))

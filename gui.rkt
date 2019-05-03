@@ -1,7 +1,6 @@
 #lang racket
 
 (require "syms.rkt")
-(require "reader.rkt")
 (require racket/gui)
 (require racket/draw)
 
